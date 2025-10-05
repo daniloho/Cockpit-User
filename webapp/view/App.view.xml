@@ -1,6 +1,33 @@
-<mvc:View controllerName="com.alfa.cockpit.cockpitusers.controller.App"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-    </Page>
+<mvc:View
+  controllerName="com.alfa.cockpit.cockpitusers.controller.App"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:f="sap.f"
+  xmlns:m="sap.m">
+
+  <!-- FCL raiz -->
+  <f:FlexibleColumnLayout id="fcl" layout="OneColumn">
+    <!-- Mostra uma página de boas-vindas na coluna inicial -->
+    <f:beginColumnPages>
+      <m:Page id="landing" title="Cockpit">
+        <m:subHeader>
+          <m:Toolbar>
+            <m:Title text="Bem-vindo 👋" level="H2"/>
+            <m:ToolbarSpacer/>
+            <m:Button
+              type="Emphasized"
+              icon="sap-icon://account"
+              text="Ir para Usuários"
+              press=".goToUsers"/>
+          </m:Toolbar>
+        </m:subHeader>
+
+        <m:content>
+          <m:VBox class="sapUiLargeMargin">
+            <m:Text text="Use o botão acima para abrir a listagem de usuários."/>
+            <m:Text text="Este conteúdo é só um placeholder — quando o roteamento estiver ok, você pode remover."/>
+          </m:VBox>
+        </m:content>
+      </m:Page>
+    </f:beginColumnPages>
+  </f:FlexibleColumnLayout>
 </mvc:View>

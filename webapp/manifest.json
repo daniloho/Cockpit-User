@@ -4,9 +4,7 @@
     "id": "com.alfa.cockpit.cockpitusers",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
+    "applicationVersion": { "version": "0.0.1" },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
@@ -20,9 +18,9 @@
         "uri": "/odata/v2/Catalog/",
         "type": "OData",
         "settings": {
-          "annotations": [],
+          "odataVersion": "2.0",
           "localUri": "localService/mainService/metadata.xml",
-          "odataVersion": "2.0"
+          "annotations": []
         }
       }
     },
@@ -33,96 +31,72 @@
           "action": "Display",
           "title": "{{Users-Display.flpTitle}}",
           "subTitle": "{{Users-Display.flpSubtitle}}",
-          "signature": {
-            "parameters": {},
-            "additionalParameters": "allowed"
-          }
+          "signature": { "parameters": {}, "additionalParameters": "allowed" }
         }
       }
     }
   },
+
   "sap.ui": {
     "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phone@2": "",
-      "tablet": "",
-      "tablet@2": ""
-    },
-    "deviceTypes": {
-      "desktop": true,
-      "tablet": true,
-      "phone": true
-    }
+    "icons": { "icon": "", "favIcon": "", "phone": "", "phone@2": "", "tablet": "", "tablet@2": "" },
+    "deviceTypes": { "desktop": true, "tablet": true, "phone": true }
   },
+
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.141.0",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.ui.layout": {}
       }
     },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
-    },
+    "contentDensities": { "compact": true, "cozy": true },
+
     "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "com.alfa.cockpit.cockpitusers.i18n.i18n"
-        }
-      },
       "": {
+        "type": "sap.ui.model.odata.v2.ODataModel",
         "dataSource": "mainService",
         "preload": true,
-        "settings": {}
-      }
-    },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
-        }
-      ]
-    },
-    "routing": {
-      "config": {
-        "routerClass": "sap.m.routing.Router",
-        "controlAggregation": "pages",
-        "controlId": "app",
-        "transition": "slide",
-        "type": "View",
-        "viewType": "XML",
-        "path": "com.alfa.cockpit.cockpitusers.view",
-        "async": true,
-        "viewPath": "com.alfa.cockpit.cockpitusers.view"
+        "settings": { "useBatch": false }
       },
-      "routes": [
-        {
-          "name": "RouteApp",
-          "pattern": ":?query:",
-          "target": [
-            "TargetApp"
-          ]
-        }
-      ],
-      "targets": {
-        "TargetApp": {
-          "id": "App",
-          "name": "App"
-        }
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": { "bundleName": "com.alfa.cockpit.cockpitusers.i18n.i18n" }
       }
     },
+
+    "resources": {
+      "css": [{ "uri": "css/style.css" }]
+    },
+
     "rootView": {
       "viewName": "com.alfa.cockpit.cockpitusers.view.App",
       "type": "XML",
       "id": "App",
       "async": true
+    },
+
+    "routing": {
+      "config": {
+        "routerClass": "sap.f.routing.Router",
+        "viewType": "XML",
+        "viewPath": "com.alfa.cockpit.cockpitusers.view",
+        "controlId": "fcl",
+        "controlAggregation": "beginColumnPages",
+        "async": true
+      },
+      "routes": [
+        { "name": "users", "pattern": "", "target": ["UsersList"] },
+        { "name": "userDetail", "pattern": "Users/{userId}", "target": ["UserDetail"] }
+      ],
+      "targets": {
+        "UsersList":  { "type": "View", "name": "UsersList",  "controlAggregation": "beginColumnPages" },
+        "UserDetail": { "type": "View", "name": "UserDetail", "controlAggregation": "midColumnPages" }
+      }
     }
   }
 }
