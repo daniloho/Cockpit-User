@@ -1,26 +1,26 @@
 sap.ui.define([
-    "sap/ui/core/UIComponent",
-    "com/alfa/cockpit/cockpitusers/model/models"
-], (UIComponent, models) => {
-    "use strict";
+  "sap/ui/core/UIComponent",
+  "sap/ui/model/json/JSONModel",
+  "com/alfa/cockpit/cockpitusers/model/models"
+], (UIComponent, JSONModel, models) => {
+  "use strict";
 
-    return UIComponent.extend("com.alfa.cockpit.cockpitusers.Component", {
-        metadata: {
-            manifest: "json",
-            interfaces: [
-                "sap.ui.core.IAsyncContentCreation"
-            ]
-        },
+  return UIComponent.extend("com.alfa.cockpit.cockpitusers.Component", {
+    metadata: {
+      manifest: "json",
+      interfaces: ["sap.ui.core.IAsyncContentCreation"]
+    },
 
-        init() {
-            // call the base component's init function
-            UIComponent.prototype.init.apply(this, arguments);
+    init() {
+      // base init
+      UIComponent.prototype.init.apply(this, arguments);
 
-            // set the device model
-            this.setModel(models.createDeviceModel(), "device");
+      // models globais
+      this.setModel(models.createDeviceModel(), "device"); // já existe no seu projeto
+      this.setModel(new JSONModel({}), "view");            // <- usado pelas views/controllers
 
-            // enable routing
-            this.getRouter().initialize();
-        }
-    });
+      // inicia o roteamento (FCL injeta as páginas)
+      this.getRouter().initialize();
+    }
+  });
 });

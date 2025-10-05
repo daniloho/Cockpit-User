@@ -1,0 +1,27 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.uxap"
+  xmlns:m="sap.m"
+  controllerName="com.alfa.cockpit.cockpitusers.controller.UserObjectPage">
+  <ObjectPageLayout showTitleInHeaderContent="true">
+    <headerTitle>
+      <ObjectPageDynamicHeaderTitle>
+        <m:Title text="{= ${view>name} || 'Detalhe do usuário'}" level="H4"/>
+      </ObjectPageDynamicHeaderTitle>
+    </headerTitle>
+    <sections>
+      <ObjectPageSection title="Informações">
+        <ObjectPageSubSection>
+          <m:SimpleForm editable="false" layout="ResponsiveGridLayout">
+            <m:Label text="Nome"/>
+            <m:Text text="{view>name}"/>
+            <m:Label text="E-mail"/>
+            <m:Text text="{view>email}"/>
+            <m:Label text="Status"/>
+            <m:Text text="{view>status}"/>
+          </m:SimpleForm>
+        </ObjectPageSubSection>
+      </ObjectPageSection>
+    </sections>
+  </ObjectPageLayout>
+</mvc:View>

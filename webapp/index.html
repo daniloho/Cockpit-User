@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Alfa Cockpit</title>
-    <style>
-        html, body, body > div, #container, #container-uiarea {
-            height: 100%;
-        }
-    </style>
-    <script
-        id="sap-ui-bootstrap"
-        src="resources/sap-ui-core.js"
-        data-sap-ui-theme="sap_horizon"
-        data-sap-ui-resource-roots='{
-            "com.alfa.cockpit.cockpitusers": "./"
-        }'
-        data-sap-ui-on-init="module:sap/ui/core/ComponentSupport"
-        data-sap-ui-compat-version="edge"
-        data-sap-ui-async="true"
-        data-sap-ui-frame-options="trusted"
-    ></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alfa Cockpit</title>
+  <style>html,body,#content{height:100%;}</style>
+
+  <script id="sap-ui-bootstrap"
+    src="resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-resourceroots='{"com.alfa.cockpit.cockpitusers":"./"}'
+    data-sap-ui-compatVersion="edge"
+    data-sap-ui-async="true"
+    data-sap-ui-frame-options="trusted">
+  </script>
 </head>
-<body class="sapUiBody sapUiSizeCompact" id="content">
-    <div
-        data-sap-ui-component
-        data-name="com.alfa.cockpit.cockpitusers"
-        data-id="container"
-        data-settings='{"id" : "com.alfa.cockpit.cockpitusers"}'
-        data-handle-validation="true"
-    ></div>
+<body class="sapUiBody sapUiSizeCompact">
+  <div id="content"></div>
+
+  <script>
+    sap.ui.getCore().attachInit(function () {
+      // Se estiver rodando dentro do FLP, o FLP cria o componente. Não crie aqui.
+      if (window.sap && sap.ushell && sap.ushell.Container) { return; }
+
+      // Standalone (index.html): crie o componente aqui
+      sap.ui.require(["sap/ui/core/ComponentContainer"], function (ComponentContainer) {
+        new ComponentContainer({
+          name: "com.alfa.cockpit.cockpitusers",
+          async: true,
+          height: "100%"
+        }).placeAt("content");
+      });
+    });
+  </script>
 </body>
 </html>

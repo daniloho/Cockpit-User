@@ -1,0 +1,56 @@
+<mvc:View
+  controllerName="com.alfa.cockpit.cockpitusers.controller.UsersList"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m">
+
+  <Page id="page" title="Usuários">
+    <subHeader>
+      <Toolbar>
+        <SearchField id="sfEmail" width="18rem"
+          placeholder="Filtrar por e-mail"
+          liveChange=".onEmailFilter"
+          search=".onEmailFilter"/>
+        <ToolbarSpacer/>
+        <Button text="Novo" type="Emphasized" icon="sap-icon://add" press=".onCreate"/>
+      </Toolbar>
+    </subHeader>
+
+    <content>
+      <Table id="tblUsers"
+        items="{
+          path: '/Users',
+          sorter: [{ path: 'name', descending: false }]
+        }"
+        mode="SingleSelectMaster">
+        <headerToolbar>
+          <Toolbar>
+            <Title text="Lista de usuários"/>
+          </Toolbar>
+        </headerToolbar>
+
+        <columns>
+          <Column><Text text="Nome"/></Column>
+          <Column><Text text="E-mail"/></Column>
+          <Column hAlign="Center" width="8rem"><Text text="Status"/></Column>
+          <Column hAlign="Center" width="7rem"><Text text="Ações"/></Column>
+        </columns>
+
+        <items>
+          <ColumnListItem type="Active" press=".onItemPress">
+            <cells>
+              <ObjectIdentifier title="{name}"/>
+              <ObjectStatus text="{email}"/>
+              <ObjectStatus
+                state="{= ${status} === 'enable' ? 'Success' : 'Error' }"
+                text="{= ${status} === 'enable' ? 'Ativo' : 'Inativo' }"/>
+              <HBox justifyContent="Center" alignItems="Center" renderType="Bare">
+                <Button icon="sap-icon://edit" type="Transparent" press=".onEdit"/>
+                <Button icon="sap-icon://delete" type="Transparent" press=".onDelete"/>
+              </HBox>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    </content>
+  </Page>
+</mvc:View>
