@@ -1,0 +1,24 @@
+# Node / UI5
+node_modules/
+dist/
+coverage/
+.cache/
+.tmp/
+*.log
+.DS_Store
+
+# UI5/Fiori tooling
+.ui5/
+.fiori/
+.vscode/.sap
+
+# MTA (se usar)
+mta_archives/
+*.mtar
+
+# Mock local (dados gerados)
+webapp/localService/**/data/**
+
+# Segredos
+.env
+.env.*
